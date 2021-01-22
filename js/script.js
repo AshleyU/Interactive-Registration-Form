@@ -1,3 +1,1 @@
-
-
-console.log("test");
+const userName = document.querySelector('#name').focus();;
