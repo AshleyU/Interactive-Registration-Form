@@ -1,6 +1,8 @@
 const userName = document.querySelector('#name').focus();
 const selectJobTitle = document.querySelector('#title');
 const otherJobRole = document.querySelector('#other-job-role');
+const colorSelect = document.querySelector('#color');
+const designSelect = document.querySelector('#design');
 
 //Hides the text field to describe a job when "other" is selected by default
 
@@ -18,3 +20,37 @@ selectJobTitle.addEventListener('change', (event) => {
 	}
 
 });
+
+//Disables the color select drop down menu by default
+
+colorSelect.disabled = true;
+
+/*Listens for which shirt design is choosen and changes
+which color options are available for that design*/
+
+designSelect.addEventListener('change', (event) => {
+
+	for (let i = 0; i < colorSelect.children.length; i++) {
+		colorSelect.disabled = false;
+		let shirtDesign = event.target.value;
+		let currentColorOption = colorSelect.children[i];
+		let shirtTheme = currentColorOption.getAttribute("data-theme");
+
+		if ( shirtDesign == shirtTheme ) {
+			currentColorOption.hidden = false;
+			shirtTheme = true;
+		} else if ( shirtDesign != shirtTheme ) {
+			currentColorOption.hidden = true;
+			shirtTheme = false;
+		}
+	}
+});
+
+// If they are, set the hidden property of the loop’s current option element to false,
+// and set the selected attribute of the loop’s current option element to true. 
+// And if the two variables are not equal to one another, 
+// set the hidden property of the loop’s current option element to true, 
+// and set the selected attribute of the loop’s current option element to false.
+
+
+
