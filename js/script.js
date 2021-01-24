@@ -10,6 +10,11 @@ const paymentMethod = document.querySelector('#payment');
 const creditCard = document.querySelector("#credit-card");
 const paypal = document.querySelector('#paypal');
 const bitcoin = document.querySelector('#bitcoin');
+const emailAddress = document.querySelector('#email');
+const cardNumber = document.querySelector('#cc-num');
+const zipCode = document.querySelector('#zip');
+const cvv = document.querySelector('#cvv');
+const formElement = document.getElementsByTagName("FORM");
 
 //Sets the default payment method as Credit Card
 
