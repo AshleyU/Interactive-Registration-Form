@@ -5,7 +5,7 @@ const colorSelect = document.querySelector('#color');
 const designSelect = document.querySelector('#design');
 const regForActivities = document.querySelector('#activities');
 let totalCost = document.querySelector('#activities-cost');
-let startingCost = 0;
+let calculatedTotalCost = 0;
 
 //Hides the text field to describe a job when "other" is selected by default
 
@@ -54,10 +54,11 @@ regForActivities.addEventListener('change', (event) => {
 	let clickedActCost = event.target.getAttribute("data-cost");
 	let actCostNumber = parseInt(clickedActCost);
 	if (event.target.checked) {
-		startingCost += actCostNumber;
+		calculatedTotalCost += actCostNumber;
 	} else {
-		startingCost -= actCostNumber;
+		calculatedTotalCost -= actCostNumber;
 	}
+	totalCost.innerHTML = `Total: $${calculatedTotalCost} `;
 
 });
 
