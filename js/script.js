@@ -46,11 +46,5 @@ designSelect.addEventListener('change', (event) => {
 	}
 });
 
-// If they are, set the hidden property of the loop’s current option element to false,
-// and set the selected attribute of the loop’s current option element to true. 
-// And if the two variables are not equal to one another, 
-// set the hidden property of the loop’s current option element to true, 
-// and set the selected attribute of the loop’s current option element to false.
-
 
 
