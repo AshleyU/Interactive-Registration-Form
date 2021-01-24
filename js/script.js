@@ -3,6 +3,9 @@ const selectJobTitle = document.querySelector('#title');
 const otherJobRole = document.querySelector('#other-job-role');
 const colorSelect = document.querySelector('#color');
 const designSelect = document.querySelector('#design');
+const regForActivities = document.querySelector('#activities');
+let totalCost = document.querySelector('#activities-cost');
+let startingCost = 0;
 
 //Hides the text field to describe a job when "other" is selected by default
 
@@ -44,6 +47,18 @@ designSelect.addEventListener('change', (event) => {
 			shirtTheme = false;
 		}
 	}
+});
+
+
+regForActivities.addEventListener('change', (event) => {
+	let clickedActCost = event.target.getAttribute("data-cost");
+	let actCostNumber = parseInt(clickedActCost);
+	if (event.target.checked) {
+		startingCost += actCostNumber;
+	} else {
+		startingCost -= actCostNumber;
+	}
+
 });
 
 
