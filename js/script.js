@@ -123,4 +123,13 @@ formElement.addEventListener('submit', (event) => {
 	} 
 });
 
+/*Listens for the form to submit and checks to make sure
+at least 1 activity has been selected. If not the form won't submit.*/
+
+formElement.addEventListener('submit', (event) => {
+	if (regForActivities.checked) {
+	} else {
+		event.preventDefault();
+	}
+});
 
