@@ -102,12 +102,23 @@ paymentMethod.addEventListener('change', (event) => {
 });
 
 /*Listens for the form to submit and checks if the 
-name entered is valid (if it is all lowercase letters)*/
+name field is filled in or not. If the field is empty it won't submit.*/
 
 formElement.addEventListener('submit', (event) => {
 	let nameFieldValue = document.querySelector('#name').value;
-	let nameTest = /^[a-z]+$/.test(nameFieldValue);
+	let nameTest = /s/.test(nameFieldValue);
 	if (nameTest == false) {
+		event.preventDefault();
+	} 
+});
+
+/*Listens for the form to submit and checks if the 
+email field is a vaild email format. If not, it won't submit.*/
+
+formElement.addEventListener('submit', (event) => {
+	let emailFieldValue = document.querySelector('#email').value;
+	let emailTest = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailFieldValue);
+	if (emailTest == false) {
 		event.preventDefault();
 	} 
 });
