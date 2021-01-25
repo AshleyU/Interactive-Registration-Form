@@ -16,6 +16,7 @@ const zipCode = document.querySelector('#zip');
 const cvv = document.querySelector('#cvv');
 const formElement = document.getElementsByTagName('form')[0];
 
+
 //Sets the default payment method as Credit Card
 
 const defaultPaymentMethod = paymentMethod.children[1].setAttribute("selected", "selected");
@@ -127,8 +128,16 @@ formElement.addEventListener('submit', (event) => {
 at least 1 activity has been selected. If not the form won't submit.*/
 
 formElement.addEventListener('submit', (event) => {
-	if (regForActivities.checked) {
-	} else {
+	const isChecked = false;
+	const activitiesBox = document.querySelector('#activities-box');
+	const ActivitiesBoxInput = activitiesBox.querySelectorAll("input"); 
+	for (let i = 0; i < ActivitiesBoxInput.length; i++) {
+		if (ActivitiesBoxInput[i].checked) {
+			isChecked = true;
+			break;
+		}
+	} 
+	if (!isChecked) {
 		event.preventDefault();
 	}
 });
