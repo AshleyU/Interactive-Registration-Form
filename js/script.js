@@ -14,7 +14,7 @@ const emailAddress = document.querySelector('#email');
 const cardNumber = document.querySelector('#cc-num');
 const zipCode = document.querySelector('#zip');
 const cvv = document.querySelector('#cvv');
-const formElement = document.getElementsByTagName("FORM");
+const formElement = document.getElementsByTagName('form')[0];
 
 //Sets the default payment method as Credit Card
 
@@ -100,4 +100,16 @@ paymentMethod.addEventListener('change', (event) => {
 		creditCard.style.display = 'none';
 	}
 });
+
+/*Listens for the form to submit and checks if the 
+name entered is valid (if it is all lowercase letters)*/
+
+formElement.addEventListener('submit', (event) => {
+	let nameFieldValue = document.querySelector('#name').value;
+	let nameTest = /^[a-z]+$/.test(nameFieldValue);
+	if (nameTest == false) {
+		event.preventDefault();
+	} 
+});
+
 
