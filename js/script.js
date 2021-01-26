@@ -128,7 +128,7 @@ formElement.addEventListener('submit', (event) => {
 at least 1 activity has been selected. If not the form won't submit.*/
 
 formElement.addEventListener('submit', (event) => {
-	const isChecked = false;
+	let isChecked = false;
 	const activitiesBox = document.querySelector('#activities-box');
 	const ActivitiesBoxInput = activitiesBox.querySelectorAll("input"); 
 	for (let i = 0; i < ActivitiesBoxInput.length; i++) {
@@ -141,4 +141,13 @@ formElement.addEventListener('submit', (event) => {
 		event.preventDefault();
 	}
 });
+
+formElement.addEventListener('submit', (event) => {
+	let creditCardNumberValue = document.querySelector('#cc-num').value;
+	let ccTest = /^[0-9]{13,16}$/.test(creditCardNumberValue);
+	if (ccTest == false) {
+		event.preventDefault();
+	} 
+});
+
 
