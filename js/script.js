@@ -153,5 +153,18 @@ formElement.addEventListener('submit', (event) => {
 	} 
 });
 
+/*Listens for the form to submit and checks to make sure
+that the zip code is 5 numbers. If not the form won't submit.*/
+
+formElement.addEventListener('submit', (event) => {
+	let zipCodeValue = zipCode.value;
+	let zipTest = /^[0-9]{5}$/.test(zipCodeValue);
+	if (zipTest == false) {
+		event.preventDefault();
+	} 
+});
+
+
+
 
 
