@@ -142,6 +142,9 @@ formElement.addEventListener('submit', (event) => {
 	}
 });
 
+/*Listens for the form to submit and checks to make sure
+that the cc number is between 13-16 numbers. If not the form won't submit.*/
+
 formElement.addEventListener('submit', (event) => {
 	let creditCardNumberValue = document.querySelector('#cc-num').value;
 	let ccTest = /^[0-9]{13,16}$/.test(creditCardNumberValue);
@@ -149,5 +152,6 @@ formElement.addEventListener('submit', (event) => {
 		event.preventDefault();
 	} 
 });
+
 
 
