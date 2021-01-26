@@ -107,7 +107,7 @@ name field is filled in or not. If the field is empty it won't submit.*/
 
 formElement.addEventListener('submit', (event) => {
 	let nameFieldValue = document.querySelector('#name').value;
-	let nameTest = /s/.test(nameFieldValue);
+	let nameTest = /[a-zA-Z]{1,}/.test(nameFieldValue);
 	if (nameTest == false) {
 		event.preventDefault();
 	} 
@@ -142,27 +142,48 @@ formElement.addEventListener('submit', (event) => {
 	}
 });
 
-/*Listens for the form to submit and checks to make sure
-that the cc number is between 13-16 numbers. If not the form won't submit.*/
+	/*Listens for the form to submit and checks to make sure
+	that the cc number is between 13-16 numbers. If not the form won't submit.*/
 
-formElement.addEventListener('submit', (event) => {
-	let creditCardNumberValue = document.querySelector('#cc-num').value;
-	let ccTest = /^[0-9]{13,16}$/.test(creditCardNumberValue);
-	if (ccTest == false) {
-		event.preventDefault();
-	} 
-});
+	formElement.addEventListener('submit', (event) => {
+		if ( paymentMethod.value == 'credit-card' ) {
+			let creditCardNumberValue = document.querySelector('#cc-num').value;
+			let ccTest = /^[0-9]{13,16}$/.test(creditCardNumberValue);
+			if (ccTest == false) {
+				event.preventDefault();
+			} 
+		}
+	});
 
-/*Listens for the form to submit and checks to make sure
-that the zip code is 5 numbers. If not the form won't submit.*/
+	/*Listens for the form to submit and checks to make sure
+	that the zip code is 5 numbers. If not the form won't submit.*/
 
-formElement.addEventListener('submit', (event) => {
-	let zipCodeValue = zipCode.value;
-	let zipTest = /^[0-9]{5}$/.test(zipCodeValue);
-	if (zipTest == false) {
-		event.preventDefault();
-	} 
-});
+	formElement.addEventListener('submit', (event) => {
+		if ( paymentMethod.value == 'credit-card' ) {
+			let zipCodeValue = zipCode.value;
+			let zipTest = /^[0-9]{5}$/.test(zipCodeValue);
+			if (zipTest == false) {
+				event.preventDefault();
+			} 
+		}
+	});
+
+	/*Listens for the form to submit and checks to make sure
+	that the cvv is 3 numbers. If not the form won't submit.*/
+
+	formElement.addEventListener('submit', (event) => {
+		if ( paymentMethod.value == 'credit-card' ) {
+			let cvvValue = cvv.value;
+			let cvvTest = /^[0-9]{3}$/.test(cvvValue);
+			if (cvvTest == false) {
+				event.preventDefault();
+			} 
+		}
+	});
+
+
+
+
 
 
 
