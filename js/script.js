@@ -168,9 +168,17 @@ formElement.addEventListener('submit', (event) => {
 	if ( paymentMethod.value == 'credit-card' ) {
 		let creditCardNumberValue = document.querySelector('#cc-num').value;
 		let ccTest = /^[0-9]{13,16}$/.test(creditCardNumberValue);
+		let ccNumField = document.querySelector('#cc-num');
 		if (ccTest == false) {
 			event.preventDefault();
+			ccNumField.parentElement.classList.add("not-valid");
+			ccNumField.classList.remove("valid");
+			ccNumField.lastElementChild.style.display = 'block';
 		} 
+		if (ccTest == true) {
+		ccNumField.parentElement.classList.add("valid");
+		ccNumField.classList.remove("not-valid");
+		}
 	}
 });
 
