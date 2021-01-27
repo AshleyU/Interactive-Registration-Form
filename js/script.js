@@ -111,9 +111,17 @@ name field is filled in or not. If the field is empty it won't submit.*/
 formElement.addEventListener('submit', (event) => {
 	let nameFieldValue = document.querySelector('#name').value;
 	let nameTest = /[a-zA-Z]{1,}/.test(nameFieldValue);
+	let nameField = document.querySelector('#name');
 	if (nameTest == false) {
 		event.preventDefault();
+		nameField.parentElement.classList.add("not-valid");
+		nameField.classList.remove("valid");
+		nameField.lastElementChild.style.display = 'block';
 	} 
+	if (nameTest == true) {
+		nameField.parentElement.classList.add("valid");
+		nameField.classList.remove("not-valid");
+	}
 });
 
 /*Listens for the form to submit and checks if the 
@@ -122,9 +130,17 @@ email field is a vaild email format. If not, it won't submit.*/
 formElement.addEventListener('submit', (event) => {
 	let emailFieldValue = document.querySelector('#email').value;
 	let emailTest = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailFieldValue);
+	let emailField = document.querySelector('#email');
 	if (emailTest == false) {
 		event.preventDefault();
+		emailField.parentElement.classList.add("not-valid");
+		emailField.classList.remove("valid");
+		emailField.lastElementChild.style.display = 'block';
 	} 
+	if (emailTest == true) {
+		emailField.parentElement.classList.add("valid");
+		emailField.classList.remove("not-valid");
+	}
 });
 
 /*Listens for the form to submit and checks to make sure
@@ -140,9 +156,9 @@ formElement.addEventListener('submit', (event) => {
 			break;
 		}
 	} 
-	if (!isChecked) {
+		if (!isChecked) {
 		event.preventDefault();
-	}
+		}
 });
 
 /*Listens for the form to submit and checks to make sure
