@@ -115,12 +115,13 @@ formElement.addEventListener('submit', (event) => {
 	if (nameTest == false) {
 		event.preventDefault();
 		nameField.parentElement.classList.add("not-valid");
-		nameField.classList.remove("valid");
-		nameField.lastElementChild.style.display = 'block';
+		nameField.parentElement.classList.remove("valid");
+		nameField.parentElement.lastElementChild.style.display = 'block';
 	} 
 	if (nameTest == true) {
 		nameField.parentElement.classList.add("valid");
 		nameField.classList.remove("not-valid");
+		nameField.parentElement.lastElementChild.style.display = 'none';
 	}
 });
 
@@ -134,12 +135,13 @@ formElement.addEventListener('submit', (event) => {
 	if (emailTest == false) {
 		event.preventDefault();
 		emailField.parentElement.classList.add("not-valid");
-		emailField.classList.remove("valid");
-		emailField.lastElementChild.style.display = 'block';
+		emailField.parentElement.classList.remove("valid");
+		emailField.parentElement.lastElementChild.style.display = 'block';
 	} 
 	if (emailTest == true) {
 		emailField.parentElement.classList.add("valid");
-		emailField.classList.remove("not-valid");
+		emailField.parentElement.classList.remove("not-valid");
+		emailField.parentElement.lastElementChild.style.display = 'none';
 	}
 });
 
@@ -172,12 +174,13 @@ formElement.addEventListener('submit', (event) => {
 		if (ccTest == false) {
 			event.preventDefault();
 			ccNumField.parentElement.classList.add("not-valid");
-			ccNumField.classList.remove("valid");
-			ccNumField.lastElementChild.style.display = 'block';
+			ccNumField.parentElement.classList.remove("valid");
+			ccNumField.parentElement.lastElementChild.style.display = 'block';
 		} 
 		if (ccTest == true) {
-		ccNumField.parentElement.classList.add("valid");
-		ccNumField.classList.remove("not-valid");
+			ccNumField.parentElement.classList.add("valid");
+			ccNumField.parentElement.classList.remove("not-valid");
+			ccNumField.parentElement.lastElementChild.style.display = 'none';
 		}
 	}
 });
@@ -189,9 +192,18 @@ formElement.addEventListener('submit', (event) => {
 	if ( paymentMethod.value == 'credit-card' ) {
 		let zipCodeValue = zipCode.value;
 		let zipTest = /^[0-9]{5}$/.test(zipCodeValue);
+		let zipField = document.querySelector('#zip');
 		if (zipTest == false) {
 			event.preventDefault();
+			zipField.parentElement.classList.add("not-valid");
+			zipField.parentElement.classList.remove("valid");
+			zipField.parentElement.lastElementChild.style.display = 'block';
 		} 
+		if (zipTest == true) {
+			zipField.parentElement.classList.add("valid");
+			zipField.parentElement.classList.remove("not-valid");
+			zipField.parentElement.lastElementChild.style.display = 'none';
+		}
 	}
 });
 
