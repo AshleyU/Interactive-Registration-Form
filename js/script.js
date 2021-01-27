@@ -214,9 +214,18 @@ formElement.addEventListener('submit', (event) => {
 	if ( paymentMethod.value == 'credit-card' ) {
 		let cvvValue = cvv.value;
 		let cvvTest = /^[0-9]{3}$/.test(cvvValue);
+		let cvvField = document.querySelector('#cvv');
 		if (cvvTest == false) {
 			event.preventDefault();
+			cvvField.parentElement.classList.add("not-valid");
+			cvvField.parentElement.classList.remove("valid");
+			cvvField.parentElement.lastElementChild.style.display = 'block';
 		} 
+		if (cvvTest == true) {
+			cvvField.parentElement.classList.add("valid");
+			cvvField.parentElement.classList.remove("not-valid");
+			cvvField.parentElement.lastElementChild.style.display = 'none';
+		}
 	}
 });
 
