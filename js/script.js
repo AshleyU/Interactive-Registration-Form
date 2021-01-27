@@ -16,7 +16,7 @@ const zipCode = document.querySelector('#zip');
 const cvv = document.querySelector('#cvv');
 const formElement = document.getElementsByTagName('form')[0];
 const activitiesSection = document.querySelector('#activities-box');
-const activitiesSectionInput = activitiesSection.querySelectorAll("input"); 
+const activitiesSectionChecks = activitiesSection.querySelectorAll("input"); 
 
 
 
@@ -145,45 +145,55 @@ formElement.addEventListener('submit', (event) => {
 	}
 });
 
-	/*Listens for the form to submit and checks to make sure
-	that the cc number is between 13-16 numbers. If not the form won't submit.*/
+/*Listens for the form to submit and checks to make sure
+that the cc number is between 13-16 numbers. If not the form won't submit.*/
 
-	formElement.addEventListener('submit', (event) => {
-		if ( paymentMethod.value == 'credit-card' ) {
-			let creditCardNumberValue = document.querySelector('#cc-num').value;
-			let ccTest = /^[0-9]{13,16}$/.test(creditCardNumberValue);
-			if (ccTest == false) {
-				event.preventDefault();
-			} 
-		}
+formElement.addEventListener('submit', (event) => {
+	if ( paymentMethod.value == 'credit-card' ) {
+		let creditCardNumberValue = document.querySelector('#cc-num').value;
+		let ccTest = /^[0-9]{13,16}$/.test(creditCardNumberValue);
+		if (ccTest == false) {
+			event.preventDefault();
+		} 
+	}
+});
+
+/*Listens for the form to submit and checks to make sure
+that the zip code is 5 numbers. If not the form won't submit.*/
+
+formElement.addEventListener('submit', (event) => {
+	if ( paymentMethod.value == 'credit-card' ) {
+		let zipCodeValue = zipCode.value;
+		let zipTest = /^[0-9]{5}$/.test(zipCodeValue);
+		if (zipTest == false) {
+			event.preventDefault();
+		} 
+	}
+});
+
+/*Listens for the form to submit and checks to make sure
+that the cvv is 3 numbers. If not the form won't submit.*/
+
+formElement.addEventListener('submit', (event) => {
+	if ( paymentMethod.value == 'credit-card' ) {
+		let cvvValue = cvv.value;
+		let cvvTest = /^[0-9]{3}$/.test(cvvValue);
+		if (cvvTest == false) {
+			event.preventDefault();
+		} 
+	}
+});
+
+for ( let i = 0; i < activitiesSectionChecks.length; i++ ) {
+	
+	activitiesSectionChecks[i].addEventListener('focus', (event) => {
+		activitiesSectionChecks[i].parentElement.classList.add("focus");
 	});
 
-	/*Listens for the form to submit and checks to make sure
-	that the zip code is 5 numbers. If not the form won't submit.*/
-
-	formElement.addEventListener('submit', (event) => {
-		if ( paymentMethod.value == 'credit-card' ) {
-			let zipCodeValue = zipCode.value;
-			let zipTest = /^[0-9]{5}$/.test(zipCodeValue);
-			if (zipTest == false) {
-				event.preventDefault();
-			} 
-		}
+	activitiesSectionChecks[i].addEventListener('blur', (event) => {
+		activitiesSectionChecks[i].parentElement.classList.remove("focus");
 	});
-
-	/*Listens for the form to submit and checks to make sure
-	that the cvv is 3 numbers. If not the form won't submit.*/
-
-	formElement.addEventListener('submit', (event) => {
-		if ( paymentMethod.value == 'credit-card' ) {
-			let cvvValue = cvv.value;
-			let cvvTest = /^[0-9]{3}$/.test(cvvValue);
-			if (cvvTest == false) {
-				event.preventDefault();
-			} 
-		}
-	});
-
+}
 
 
 
