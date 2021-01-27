@@ -184,6 +184,9 @@ formElement.addEventListener('submit', (event) => {
 	}
 });
 
+/*Loops through the activity checkboxes to bring them 
+into focus when selected and unfocused when not.*/
+
 for ( let i = 0; i < activitiesSectionChecks.length; i++ ) {
 	
 	activitiesSectionChecks[i].addEventListener('focus', (event) => {
