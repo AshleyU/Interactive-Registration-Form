@@ -152,14 +152,21 @@ formElement.addEventListener('submit', (event) => {
 	let isChecked = false;
 	const activitiesBox = document.querySelector('#activities-box');
 	const ActivitiesBoxInput = activitiesBox.querySelectorAll("input"); 
+	let activitiesField = document.querySelector('#activities-box');
 	for (let i = 0; i < ActivitiesBoxInput.length; i++) {
 		if (ActivitiesBoxInput[i].checked) {
 			isChecked = true;
+			activitiesField.parentElement.classList.add("valid");
+			activitiesField.parentElement.classList.remove("not-valid");
+			activitiesField.parentElement.lastElementChild.style.display = 'none';
 			break;
 		}
 	} 
-		if (!isChecked) {
+	if (isChecked == false) {
 		event.preventDefault();
+		activitiesField.parentElement.classList.add("not-valid");
+		activitiesField.parentElement.classList.remove("valid");
+		activitiesField.parentElement.lastElementChild.style.display = 'block';
 		}
 });
 
