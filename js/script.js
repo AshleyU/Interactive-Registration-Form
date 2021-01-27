@@ -15,6 +15,9 @@ const cardNumber = document.querySelector('#cc-num');
 const zipCode = document.querySelector('#zip');
 const cvv = document.querySelector('#cvv');
 const formElement = document.getElementsByTagName('form')[0];
+const activitiesSection = document.querySelector('#activities-box');
+const activitiesSectionInput = activitiesSection.querySelectorAll("input"); 
+
 
 
 //Sets the default payment method as Credit Card
