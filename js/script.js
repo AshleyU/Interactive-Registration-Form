@@ -1,4 +1,4 @@
-const userName = document.querySelector('#name').focus();
+const userName = document.querySelector('#name');
 const selectJobTitle = document.querySelector('#title');
 const otherJobRole = document.querySelector('#other-job-role');
 const colorSelect = document.querySelector('#color');
@@ -15,8 +15,8 @@ const cardNumber = document.querySelector('#cc-num');
 const zipCode = document.querySelector('#zip');
 const cvv = document.querySelector('#cvv');
 const formElement = document.getElementsByTagName('form')[0];
-const activitiesSection = document.querySelector('#activities-box');
-const activitiesSectionChecks = activitiesSection.querySelectorAll("input"); 
+const activitiesBox = document.querySelector('#activities-box');
+const activitiesSectionChecks = activitiesBox.querySelectorAll("input"); 
 
 
 
@@ -33,6 +33,9 @@ otherJobRole.style.display = 'none';
 paypal.style.display = 'none';
 
 bitcoin.style.display = 'none';
+
+// focus on username by default
+userName.focus();
 
 /*Listens for "other" to be selected from the drop down menu and if
 it is then displays the "other job role?" text area */
@@ -105,136 +108,165 @@ paymentMethod.addEventListener('change', (event) => {
 	}
 });
 
-/*Listens for the form to submit and checks if the 
-name field is filled in or not. If the field is empty it won't submit.*/
 
 formElement.addEventListener('submit', (event) => {
-	let nameFieldValue = document.querySelector('#name').value;
+	/*Listens for the form to submit and checks if the 
+	name field is filled in or not. If the field is empty it won't submit.*/
+	validateName();
+
+	/*Listens for the form to submit and checks if the 
+	email field is a vaild email format. If not, it won't submit.*/
+	validateEmail();
+
+	/*Listens for the form to submit and checks to make sure
+	at least 1 activity has been selected. If not the form won't submit.*/
+	validateActivities();
+
+	/*Listens for the form to submit and checks to make sure
+	that the cc number is between 13-16 numbers. If not the form won't submit.*/
+	validateCreditCardNumber();
+
+	/*Listens for the form to submit and checks to make sure
+	that the zip code is 5 numbers. If not the form won't submit.*/
+	validateCreditCardZip();
+
+	/*Listens for the form to submit and checks to make sure
+	that the cvv is 3 numbers. If not the form won't submit.*/
+	validateCVV();
+});
+
+userName.addEventListener('keyup', (event) => {
+	validateName();
+});
+emailAddress.addEventListener('keyup', (event) => {
+	validateEmail();
+});
+cardNumber.addEventListener('keyup', (event) => {
+	validateCreditCardNumber();
+});
+
+zipCode.addEventListener('keyup', (event) => {
+	validateCreditCardZip();
+});
+
+cvv.addEventListener('keyup', (event) => {
+	validateCVV();
+});
+
+
+const validateName = () => {
+	let nameFieldValue = userName.value;
 	let nameTest = /[a-zA-Z]{1,}/.test(nameFieldValue);
-	let nameField = document.querySelector('#name');
 	if (nameTest == false) {
 		event.preventDefault();
-		nameField.parentElement.classList.add("not-valid");
-		nameField.parentElement.classList.remove("valid");
-		nameField.parentElement.lastElementChild.style.display = 'block';
+		userName.parentElement.classList.add("not-valid");
+		userName.parentElement.classList.remove("valid");
+		userName.parentElement.lastElementChild.style.display = 'block';
 	} 
 	if (nameTest == true) {
-		nameField.parentElement.classList.add("valid");
-		nameField.classList.remove("not-valid");
-		nameField.parentElement.lastElementChild.style.display = 'none';
+		userName.parentElement.classList.add("valid");
+		userName.classList.remove("not-valid");
+		userName.parentElement.lastElementChild.style.display = 'none';
 	}
-});
+}
 
-/*Listens for the form to submit and checks if the 
-email field is a vaild email format. If not, it won't submit.*/
 
-formElement.addEventListener('submit', (event) => {
-	let emailFieldValue = document.querySelector('#email').value;
+const validateEmail = () => {
+	let emailFieldValue = emailAddress.value;
+
+	if (emailAddress.value.trim() === '' || emailAddress.value == null) {
+		// if email address is empty, then change the hint
+		document.querySelector("#email-hint").innerText = 'Please enter an email address.';
+	} else {
+		document.querySelector("#email-hint").innerText = 'Email address must be formatted correctly';
+	}
+	
 	let emailTest = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailFieldValue);
-	let emailField = document.querySelector('#email');
 	if (emailTest == false) {
 		event.preventDefault();
-		emailField.parentElement.classList.add("not-valid");
-		emailField.parentElement.classList.remove("valid");
-		emailField.parentElement.lastElementChild.style.display = 'block';
+		emailAddress.parentElement.classList.add("not-valid");
+		emailAddress.parentElement.classList.remove("valid");
+		emailAddress.parentElement.lastElementChild.style.display = 'block';
 	} 
 	if (emailTest == true) {
-		emailField.parentElement.classList.add("valid");
-		emailField.parentElement.classList.remove("not-valid");
-		emailField.parentElement.lastElementChild.style.display = 'none';
+		emailAddress.parentElement.classList.add("valid");
+		emailAddress.parentElement.classList.remove("not-valid");
+		emailAddress.parentElement.lastElementChild.style.display = 'none';
 	}
-});
+}
 
-/*Listens for the form to submit and checks to make sure
-at least 1 activity has been selected. If not the form won't submit.*/
-
-formElement.addEventListener('submit', (event) => {
+const validateActivities = () => {
 	let isChecked = false;
-	const activitiesBox = document.querySelector('#activities-box');
 	const ActivitiesBoxInputs = activitiesBox.querySelectorAll("input"); 
-	let activitiesField = document.querySelector('#activities-box');
 	for (let i = 0; i < ActivitiesBoxInputs.length; i++) {
 		if (ActivitiesBoxInputs[i].checked) {
 			isChecked = true;
-			activitiesField.parentElement.classList.add("valid");
-			activitiesField.parentElement.classList.remove("not-valid");
-			activitiesField.parentElement.lastElementChild.style.display = 'none';
+			activitiesBox.parentElement.classList.add("valid");
+			activitiesBox.parentElement.classList.remove("not-valid");
+			activitiesBox.parentElement.lastElementChild.style.display = 'none';
 			break;
 		}
 	} 
 	if (isChecked == false) {
 		event.preventDefault();
-		activitiesField.parentElement.classList.add("not-valid");
-		activitiesField.parentElement.classList.remove("valid");
-		activitiesField.parentElement.lastElementChild.style.display = 'block';
-		}
-});
+		activitiesBox.parentElement.classList.add("not-valid");
+		activitiesBox.parentElement.classList.remove("valid");
+		activitiesBox.parentElement.lastElementChild.style.display = 'block';
+	}
+}
 
-/*Listens for the form to submit and checks to make sure
-that the cc number is between 13-16 numbers. If not the form won't submit.*/
 
-formElement.addEventListener('submit', (event) => {
+const validateCreditCardNumber = () => {
 	if ( paymentMethod.value == 'credit-card' ) {
-		let creditCardNumberValue = document.querySelector('#cc-num').value;
+		let creditCardNumberValue = cardNumber.value;
 		let ccTest = /^[0-9]{13,16}$/.test(creditCardNumberValue);
-		let ccNumField = document.querySelector('#cc-num');
 		if (ccTest == false) {
 			event.preventDefault();
-			ccNumField.parentElement.classList.add("not-valid");
-			ccNumField.parentElement.classList.remove("valid");
-			ccNumField.parentElement.lastElementChild.style.display = 'block';
+			cardNumber.parentElement.classList.add("not-valid");
+			cardNumber.parentElement.classList.remove("valid");
+			cardNumber.parentElement.lastElementChild.style.display = 'block';
 		} 
 		if (ccTest == true) {
-			ccNumField.parentElement.classList.add("valid");
-			ccNumField.parentElement.classList.remove("not-valid");
-			ccNumField.parentElement.lastElementChild.style.display = 'none';
+			cardNumber.parentElement.classList.add("valid");
+			cardNumber.parentElement.classList.remove("not-valid");
+			cardNumber.parentElement.lastElementChild.style.display = 'none';
 		}
 	}
-});
+}
 
-/*Listens for the form to submit and checks to make sure
-that the zip code is 5 numbers. If not the form won't submit.*/
-
-formElement.addEventListener('submit', (event) => {
+const validateCreditCardZip = () => {
 	if ( paymentMethod.value == 'credit-card' ) {
-		let zipCodeValue = zipCode.value;
-		let zipTest = /^[0-9]{5}$/.test(zipCodeValue);
-		let zipField = document.querySelector('#zip');
+		let zipTest = /^[0-9]{5}$/.test(zipCode.value);
 		if (zipTest == false) {
 			event.preventDefault();
-			zipField.parentElement.classList.add("not-valid");
-			zipField.parentElement.classList.remove("valid");
-			zipField.parentElement.lastElementChild.style.display = 'block';
+			zipCode.parentElement.classList.add("not-valid");
+			zipCode.parentElement.classList.remove("valid");
+			zipCode.parentElement.lastElementChild.style.display = 'block';
 		} 
 		if (zipTest == true) {
-			zipField.parentElement.classList.add("valid");
-			zipField.parentElement.classList.remove("not-valid");
-			zipField.parentElement.lastElementChild.style.display = 'none';
+			zipCode.parentElement.classList.add("valid");
+			zipCode.parentElement.classList.remove("not-valid");
+			zipCode.parentElement.lastElementChild.style.display = 'none';
 		}
 	}
-});
+}
 
-/*Listens for the form to submit and checks to make sure
-that the cvv is 3 numbers. If not the form won't submit.*/
-
-formElement.addEventListener('submit', (event) => {
+const validateCVV = () => {
 	if ( paymentMethod.value == 'credit-card' ) {
 		let cvvValue = cvv.value;
 		let cvvTest = /^[0-9]{3}$/.test(cvvValue);
-		let cvvField = document.querySelector('#cvv');
-		if (cvvTest == false) {
+		if (!cvvTest) {
 			event.preventDefault();
-			cvvField.parentElement.classList.add("not-valid");
-			cvvField.parentElement.classList.remove("valid");
-			cvvField.parentElement.lastElementChild.style.display = 'block';
-		} 
-		if (cvvTest == true) {
-			cvvField.parentElement.classList.add("valid");
-			cvvField.parentElement.classList.remove("not-valid");
-			cvvField.parentElement.lastElementChild.style.display = 'none';
+			cvv.parentElement.classList.add("not-valid");
+			cvv.parentElement.classList.remove("valid");
+			cvv.parentElement.lastElementChild.style.display = 'block';
+		} else if (cvvTest) {
+			cvv.parentElement.classList.add("valid");
+			cvv.parentElement.classList.remove("not-valid");
+			cvv.parentElement.lastElementChild.style.display = 'none';
 		}
 	}
-});
+}
 
 /*Loops through the activity checkboxes to bring them 
 into focus when selected and unfocused when not.*/
