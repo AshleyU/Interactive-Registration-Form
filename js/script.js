@@ -70,8 +70,10 @@ designSelect.addEventListener('change', (event) => {
 			currentColorOption.hidden = false;
 			shirtTheme = true;
 		} else if ( shirtDesign != shirtTheme ) {
+			shirtDesign.selectedIndex = 0;
 			currentColorOption.hidden = true;
 			shirtTheme = false;
+			
 		}
 	}
 });
@@ -177,7 +179,7 @@ const validateName = () => {
 	} 
 	if (nameTest == true) {
 		userName.parentElement.classList.add("valid");
-		userName.classList.remove("not-valid");
+		userName.parentElement.classList.remove("not-valid");
 		userName.parentElement.lastElementChild.style.display = 'none';
 	}
 }
