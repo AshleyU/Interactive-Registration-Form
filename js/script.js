@@ -67,10 +67,10 @@ designSelect.addEventListener('change', (event) => {
 
 		if ( shirtDesign == shirtTheme ) {
 			currentColorOption.hidden = false;
-			currentColorOption.setAttribute("selected", true);
+			currentColorOption.selected = true;
 		} else {
 			currentColorOption.hidden = true;
-			currentColorOption.setAttribute("selected", false);
+			currentColorOption.selected = false;
 		}
 	}
 });
