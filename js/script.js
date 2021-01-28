@@ -151,10 +151,10 @@ at least 1 activity has been selected. If not the form won't submit.*/
 formElement.addEventListener('submit', (event) => {
 	let isChecked = false;
 	const activitiesBox = document.querySelector('#activities-box');
-	const ActivitiesBoxInput = activitiesBox.querySelectorAll("input"); 
+	const ActivitiesBoxInputs = activitiesBox.querySelectorAll("input"); 
 	let activitiesField = document.querySelector('#activities-box');
-	for (let i = 0; i < ActivitiesBoxInput.length; i++) {
-		if (ActivitiesBoxInput[i].checked) {
+	for (let i = 0; i < ActivitiesBoxInputs.length; i++) {
+		if (ActivitiesBoxInputs[i].checked) {
 			isChecked = true;
 			activitiesField.parentElement.classList.add("valid");
 			activitiesField.parentElement.classList.remove("not-valid");
@@ -248,10 +248,26 @@ for ( let i = 0; i < activitiesSectionChecks.length; i++ ) {
 	activitiesSectionChecks[i].addEventListener('blur', (event) => {
 		activitiesSectionChecks[i].parentElement.classList.remove("focus");
 	});
+
+	activitiesSectionChecks[i].addEventListener('change', (event) => {
+		disableConflictingTime(activitiesSectionChecks, event.target.checked);
+	});
 }
 
-
-
+// disableConflictingTime: activityInputs: selected activity input html elements
+const disableConflictingTime = (activityInputs, isTargetInputChecked) => {
+	let selectedTimes = [];
+	for ( let i = 0; i < activityInputs.length; i++ ) {
+		selectedTime = activityInputs[i].getAttribute('data-day-and-time');
+		activityInputs[i].parentElement.classList.remove('disabled');
+		if (!selectedTimes.includes(selectedTime)) {
+			selectedTimes.push(selectedTime);
+		} else if (isTargetInputChecked) { // if input is not checked then add disabled class
+			// conflict
+			activityInputs[i].parentElement.classList.add('disabled');
+		}
+	}
+}
 
 
 
