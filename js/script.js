@@ -68,7 +68,7 @@ designSelect.addEventListener('change', (event) => {
 		if ( shirtDesign == shirtTheme ) {
 			currentColorOption.hidden = false;
 			currentColorOption.setAttribute("selected", true);
-		} else if ( shirtDesign != shirtTheme ) {
+		} else {
 			currentColorOption.hidden = true;
 			currentColorOption.setAttribute("selected", false);
 		}
