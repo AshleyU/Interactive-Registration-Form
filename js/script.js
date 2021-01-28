@@ -59,21 +59,18 @@ colorSelect.disabled = true;
 which color options are available for that design*/
 
 designSelect.addEventListener('change', (event) => {
-
+	colorSelect.disabled = false;
 	for (let i = 0; i < colorSelect.children.length; i++) {
-		colorSelect.disabled = false;
 		let shirtDesign = event.target.value;
 		let currentColorOption = colorSelect.children[i];
 		let shirtTheme = currentColorOption.getAttribute("data-theme");
 
 		if ( shirtDesign == shirtTheme ) {
 			currentColorOption.hidden = false;
-			shirtTheme = true;
+			currentColorOption.setAttribute("selected", true);
 		} else if ( shirtDesign != shirtTheme ) {
-			shirtDesign.selectedIndex = 0;
 			currentColorOption.hidden = true;
-			shirtTheme = false;
-			
+			currentColorOption.setAttribute("selected", false);
 		}
 	}
 });
