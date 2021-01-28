@@ -106,6 +106,11 @@ paymentMethod.addEventListener('change', (event) => {
 		bitcoin.style.display = 'block';
 		paypal.style.display = 'none';
 		creditCard.style.display = 'none';
+
+	} else {
+		creditCard.style.display = 'block';
+		paypal.style.display = 'none';
+		bitcoin.style.display = 'none';
 	}
 });
 
