@@ -35,6 +35,7 @@ paypal.style.display = 'none';
 bitcoin.style.display = 'none';
 
 // focus on username by default
+
 userName.focus();
 
 /*Listens for "other" to be selected from the drop down menu and if
@@ -75,7 +76,7 @@ designSelect.addEventListener('change', (event) => {
 	}
 });
 
-/*Listens for which activites are choosen and add or subtracts the
+/*Listens for which activites are choosen and adds or subtracts the
 total and displays it in real time.*/
 
 regForActivities.addEventListener('change', (event) => {
@@ -110,6 +111,7 @@ paymentMethod.addEventListener('change', (event) => {
 
 
 formElement.addEventListener('submit', (event) => {
+
 	/*Listens for the form to submit and checks if the 
 	name field is filled in or not. If the field is empty it won't submit.*/
 	validateName();
@@ -135,6 +137,9 @@ formElement.addEventListener('submit', (event) => {
 	validateCVV();
 });
 
+/* The following 'keyup' eventListeners listen for a keyup and 
+provide form validation error indications at the moment they occur*/
+
 userName.addEventListener('keyup', (event) => {
 	validateName();
 });
@@ -153,6 +158,8 @@ cvv.addEventListener('keyup', (event) => {
 	validateCVV();
 });
 
+/* Validates that the feild is not left blank. 
+Also provides error message or let's the user know if the field is correct or not */ 
 
 const validateName = () => {
 	let nameFieldValue = userName.value;
@@ -170,6 +177,8 @@ const validateName = () => {
 	}
 }
 
+/* Validates that the email is entered correctly.
+Also provides error message or let's the user know if the field is correct or not */ 
 
 const validateEmail = () => {
 	let emailFieldValue = emailAddress.value;
@@ -195,6 +204,9 @@ const validateEmail = () => {
 	}
 }
 
+/* Validates that at least one activity is checked.
+Also provides error message or let's the user know if one is checked */ 
+
 const validateActivities = () => {
 	let isChecked = false;
 	const ActivitiesBoxInputs = activitiesBox.querySelectorAll("input"); 
@@ -215,6 +227,8 @@ const validateActivities = () => {
 	}
 }
 
+/* Validates that the cc number is entered correctly.
+Also provides error message or let's the user know if the field is correct or not */ 
 
 const validateCreditCardNumber = () => {
 	if ( paymentMethod.value == 'credit-card' ) {
@@ -234,6 +248,9 @@ const validateCreditCardNumber = () => {
 	}
 }
 
+/* Validates that the zipe code is entered correctly.
+Also provides error message or let's the user know if the field is correct or not */ 
+
 const validateCreditCardZip = () => {
 	if ( paymentMethod.value == 'credit-card' ) {
 		let zipTest = /^[0-9]{5}$/.test(zipCode.value);
@@ -250,6 +267,9 @@ const validateCreditCardZip = () => {
 		}
 	}
 }
+
+/* Validates that the cvv number is entered correctly.
+Also provides error message or let's the user know if the field is correct or not */ 
 
 const validateCVV = () => {
 	if ( paymentMethod.value == 'credit-card' ) {
@@ -286,7 +306,9 @@ for ( let i = 0; i < activitiesSectionChecks.length; i++ ) {
 	});
 }
 
-// disableConflictingTime: activityInputs: selected activity input html elements
+/* Disables activities if they have conflicting times (when checked). 
+When unchecked the disabled activities become active again.*/
+
 const disableConflictingTime = (activityInputs, isTargetInputChecked) => {
 	let selectedTimes = [];
 	for ( let i = 0; i < activityInputs.length; i++ ) {
@@ -297,11 +319,7 @@ const disableConflictingTime = (activityInputs, isTargetInputChecked) => {
 		} else if (isTargetInputChecked) { // if input is not checked then add disabled class
 			// conflict
 			activityInputs[i].parentElement.classList.add('disabled');
+			activityInputs[i].disabled = true;
 		}
 	}
 }
-
-
-
-
-
