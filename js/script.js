@@ -302,22 +302,28 @@ for ( let i = 0; i < activitiesSectionChecks.length; i++ ) {
 	});
 
 	activitiesSectionChecks[i].addEventListener('change', (event) => {
-		disableConflictingTime(activitiesSectionChecks, event.target.checked);
+		disableConflictingTime(activitiesSectionChecks, event.target);
 	});
 }
 
 /* Disables activities if they have conflicting times (when checked). 
 When unchecked the disabled activities become active again.*/
 
-const disableConflictingTime = (activityInputs, isTargetInputChecked) => {
+const disableConflictingTime = (activityInputs, targetInput) => {
 	let selectedTimes = [];
 	for ( let i = 0; i < activityInputs.length; i++ ) {
-		selectedTime = activityInputs[i].getAttribute('data-day-and-time');
+		let time = activityInputs[i].getAttribute('data-day-and-time');
+		let inputName = activityInputs[i].name;
+
+		let selectedTime = targetInput.getAttribute('data-day-and-time');
+		let selectedInputName = targetInput.name;
+		let isTargetInputChecked = targetInput.checked
+		activityInputs[i].disabled = false;
+
 		activityInputs[i].parentElement.classList.remove('disabled');
-		if (!selectedTimes.includes(selectedTime)) {
-			selectedTimes.push(selectedTime);
-		} else if (isTargetInputChecked) { // if input is not checked then add disabled class
-			// conflict
+
+		if (time === selectedTime && isTargetInputChecked && inputName != selectedInputName) {
+			// conflict - time is the same, input is checked, input name is not the same as target input name
 			activityInputs[i].parentElement.classList.add('disabled');
 			activityInputs[i].disabled = true;
 		}
